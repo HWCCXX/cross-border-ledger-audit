@@ -21,11 +21,19 @@ const { chromium } = require(playwrightPath);
       video.addEventListener("error", reject, { once: true });
     });
   });
-  for (const item of [{ time: 1.5, name: "sample-frame-01.png" }, { time: 3.5, name: "sample-frame-02.png" }]) {
+  const checkpoints = [
+    { time: 1.5, name: "final-frame-01-opening.png" },
+    { time: 20, name: "final-frame-02-audits.png" },
+    { time: 38, name: "final-frame-03-import.png" },
+    { time: 52, name: "final-frame-04-issue.png" },
+    { time: 69, name: "final-frame-05-closing.png" }
+  ];
+  for (const item of checkpoints) {
     await page.locator("video").evaluate(async function (video, time) {
       video.currentTime = time;
       await new Promise(function (resolve) { video.addEventListener("seeked", resolve, { once: true }); });
     }, item.time);
+    await page.waitForTimeout(350);
     await page.screenshot({ path: path.join(outputDir, item.name) });
   }
   await browser.close();

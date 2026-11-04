@@ -3,6 +3,7 @@
 面向跨境电商多站点经营数据的本地优先核验工具：把销售、广告、头程、采购、FBA 与利润归入统一口径，由确定性程序复算，发现差额后下钻到来源文件、工作表、数据行或 PDF 页面。
 
 - 在线演示：https://hwccxx.github.io/cross-border-ledger-audit/
+- 演示视频：https://hwccxx.github.io/cross-border-ledger-audit/video.html
 - 项目源码：https://github.com/HWCCXX/cross-border-ledger-audit
 
 ## 隐私与数据声明

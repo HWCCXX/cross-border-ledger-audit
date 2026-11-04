@@ -3,4 +3,5 @@ node_modules/
 submission/01-项目源码.zip
 tests/qa-*.png
 tests/qa-browser-report.json
+tests/video-final-frames/
 
