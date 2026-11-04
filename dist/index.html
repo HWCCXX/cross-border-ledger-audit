@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="跨境账证侦探：多站点经营数据归集、勾稽核验与证据索引演示。">
+  <meta name="theme-color" content="#102321">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%23102321' d='M8 14 32 2l24 12v23L32 62 8 37z'/%3E%3Ccircle cx='30' cy='28' r='12' fill='%23dfff72'/%3E%3Cpath stroke='%23102321' stroke-width='6' stroke-linecap='round' d='m39 37 11 11'/%3E%3C/svg%3E">
+  <title>跨境账证侦探｜合成数据演示</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="demo-ribbon" role="note">
+    <span class="ribbon-dot" aria-hidden="true"></span>
+    <strong id="ribbon-title">合成数据演示</strong>
+    <span id="ribbon-text">全部金额与业务关系均为程序生成，不代表真实企业</span>
+  </div>
+
+  <header class="site-header">
+    <a class="brand" href="#overview" aria-label="跨境账证侦探首页">
+      <svg class="brand-mark" viewBox="0 0 44 44" aria-hidden="true">
+        <path d="M7 10.5 22 3l15 7.5v14L22 41 7 24.5z" fill="currentColor"/>
+        <path d="m13 14 9-4.5 9 4.5v7.5l-9 11-9-11z" fill="#dfff72"/>
+        <circle cx="22" cy="19" r="4.5" fill="currentColor"/>
+        <path d="m25.4 22.4 4.8 4.8" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+      </svg>
+      <span>
+        <b>跨境账证侦探</b>
+        <small>LEDGER EVIDENCE LAB</small>
+      </span>
+    </a>
+
+    <nav class="tab-nav" aria-label="主视图">
+      <button class="nav-tab is-active" type="button" data-view="overview">总览</button>
+      <button class="nav-tab" type="button" data-view="costs">成本结构</button>
+      <button class="nav-tab" type="button" data-view="audits">核验结果 <span class="nav-count" id="nav-count">8</span></button>
+      <button class="nav-tab" type="button" data-view="workspace">导入与异常 <span class="lab-badge">LAB</span></button>
+    </nav>
+
+    <div class="period-pill">
+      <span id="dataset-mode-label">内置基准</span>
+      <b id="period-value">2026-01 至 2026-09</b>
+    </div>
+  </header>
+
+  <main>
+    <section class="view is-active" id="overview" data-view-panel="overview">
+      <div class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow"><span>01</span> MULTI-SOURCE RECONCILIATION</div>
+          <h1>让每一个经营数字，<br><em>找到它的证据。</em></h1>
+          <p class="hero-lead">把多站点销售、广告、头程、采购与 FBA 成本归到同一经营口径；先由程序复算，再给出可核对的结论与证据索引。</p>
+          <div class="hero-actions">
+            <button class="primary-action" type="button" data-jump="audits">查看核验结果 <span>→</span></button>
+            <button class="text-action" type="button" id="method-button">当前版如何工作</button>
+          </div>
+        </div>
+
+        <div class="hero-proof" aria-label="本次核验摘要">
+          <div class="proof-topline">
+            <span>本次数据体检</span>
+            <span class="live-chip"><i></i> 已完成</span>
+          </div>
+          <div class="score-row">
+            <div class="score-orbit" id="score-orbit">
+              <span><b id="hero-pass">8</b><small>/ 8</small></span>
+            </div>
+            <div>
+              <p class="score-label">基础规则通过</p>
+              <p class="score-note">金额、比例、站点归集与费用来源均已闭合</p>
+            </div>
+          </div>
+          <div class="proof-ledger">
+            <div><span>公开证据索引</span><b id="hero-docs">165 份</b></div>
+            <div><span>需复核项</span><b class="good" id="hero-review">0 项</b></div>
+            <div><span>账期规则</span><b>2 条已识别</b></div>
+          </div>
+          <p class="proof-disclaimer">当前数据为无异常的合成基准集，用于验证计算链路；不把“全通过”包装为真实审计结论。</p>
+        </div>
+      </div>
+
+      <div class="kpi-grid" aria-label="关键指标">
+        <article class="kpi-card kpi-dark">
+          <div class="kpi-index">01 / SALES</div>
+          <p>销售收入</p>
+          <strong id="kpi-revenue">—</strong>
+          <span class="kpi-foot">9 个月 · 人民币口径</span>
+        </article>
+        <article class="kpi-card">
+          <div class="kpi-index">02 / PROFIT</div>
+          <p>预留利润</p>
+          <strong id="kpi-profit">—</strong>
+          <span class="kpi-foot accent" id="kpi-margin">—</span>
+        </article>
+        <article class="kpi-card">
+          <div class="kpi-index">03 / SITES</div>
+          <p>匿名站点</p>
+          <strong id="kpi-sites">—</strong>
+          <span class="kpi-foot">USD · GBP · EUR · CAD</span>
+        </article>
+        <article class="kpi-card">
+          <div class="kpi-index">04 / EVIDENCE</div>
+          <p>账证文件索引</p>
+          <strong id="kpi-documents">—</strong>
+          <span class="kpi-foot">公开版不含原始票据</span>
+        </article>
+      </div>
+
+      <div class="dashboard-grid">
+        <article class="panel trend-panel">
+          <header class="panel-header">
+            <div>
+              <span class="panel-kicker">MONTHLY SIGNAL</span>
+              <h2>收入与利润趋势</h2>
+            </div>
+            <div class="chart-legend" aria-label="图例">
+              <span><i class="legend-revenue"></i>销售收入</span>
+              <span><i class="legend-profit"></i>预留利润</span>
+            </div>
+          </header>
+          <div class="trend-summary"><span>1—9 月收入增长</span><strong id="growth-rate">—</strong><small>仅描述此合成样例</small></div>
+          <div class="chart-wrap" id="trend-chart" aria-label="月度销售收入与利润趋势图"></div>
+        </article>
+
+        <article class="panel site-panel">
+          <header class="panel-header">
+            <div>
+              <span class="panel-kicker">SITE MIX</span>
+              <h2>站点收入构成</h2>
+            </div>
+            <span class="panel-total">合计 100%</span>
+          </header>
+          <div class="site-donut-row">
+            <div class="donut" id="site-donut"><span><b>5</b><small>站点</small></span></div>
+            <p>已去除真实站点与主体标识，仅保留币种、收入和占比用于演示。</p>
+          </div>
+          <div class="site-list" id="site-list"></div>
+        </article>
+      </div>
+
+      <article class="method-strip" id="method-strip">
+        <div class="method-title">
+          <span class="panel-kicker">DETERMINISTIC FIRST</span>
+          <h2>金额交给规则，解释留给证据</h2>
+        </div>
+        <ol class="method-flow">
+          <li><span>01</span><b>归一</b><small>统一月份、币种与费用字段</small></li>
+          <li><span>02</span><b>复算</b><small>过滤总计行，独立重算合计</small></li>
+          <li><span>03</span><b>勾稽</b><small>逐条核对金额、比例和账期</small></li>
+          <li><span>04</span><b>取证</b><small>链接匿名证据类型与覆盖范围</small></li>
+        </ol>
+      </article>
+    </section>
+
+    <section class="view" id="costs" data-view-panel="costs" hidden>
+      <header class="section-heading">
+        <div>
+          <span class="panel-kicker">COST ANATOMY / 2026 Q1—Q3</span>
+          <h1>一笔收入，流向哪里？</h1>
+          <p>五类经营口径完整覆盖销售收入。比例是当前合成基准集的预设结构，不代表行业基准。</p>
+        </div>
+        <div class="heading-metric"><span>销售收入</span><strong id="cost-revenue">—</strong><small>100% 已分解</small></div>
+      </header>
+
+      <article class="panel composition-panel">
+        <div class="composition-intro">
+          <span class="panel-kicker">FULL-YEAR-TO-DATE MIX</span>
+          <h2>经营结构闭合</h2>
+          <p>将鼠标移到色块或点击下方类别，查看金额与核验口径。</p>
+        </div>
+        <div class="stacked-bar" id="stacked-bar" aria-label="成本与利润构成"></div>
+        <div class="cost-list" id="cost-list"></div>
+      </article>
+
+      <article class="panel monthly-panel">
+        <header class="panel-header">
+          <div><span class="panel-kicker">MONTHLY LEDGER</span><h2>月度经营底表</h2></div>
+          <span class="safe-chip">已排除“合计”行重复入账</span>
+        </header>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>月份</th><th>销售收入</th><th>广告</th><th>头程</th><th>采购</th><th>FBA</th><th>预留利润</th><th>闭合</th></tr></thead>
+            <tbody id="monthly-body"></tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+
+    <section class="view" id="audits" data-view-panel="audits" hidden>
+      <header class="section-heading audit-heading">
+        <div>
+          <span class="panel-kicker">RECONCILIATION REPORT</span>
+          <h1>先核验，再下结论。</h1>
+          <p>每条规则都展示实算值、目标值与差额。点击结果可查看它依赖的匿名证据类型。</p>
+        </div>
+        <div class="audit-score-card">
+          <span>基础规则通过率</span>
+          <strong id="audit-rate">—</strong>
+          <small id="audit-summary">—</small>
+        </div>
+      </header>
+
+      <div class="audit-layout">
+        <article class="panel audit-list-panel">
+          <header class="panel-header">
+            <div><span class="panel-kicker">RULE RESULTS</span><h2>勾稽结果</h2></div>
+            <div class="filter-group" aria-label="结果筛选">
+              <button class="filter-button is-active" type="button" data-filter="all">全部</button>
+              <button class="filter-button" type="button" data-filter="pass">通过</button>
+              <button class="filter-button" type="button" data-filter="review">待复核</button>
+            </div>
+          </header>
+          <div class="audit-list" id="audit-list"></div>
+        </article>
+
+        <aside class="audit-aside">
+          <article class="panel period-panel">
+            <span class="panel-kicker">PERIOD LOGIC</span>
+            <h2>已识别账期口径</h2>
+            <div id="period-rules"></div>
+          </article>
+          <article class="panel boundary-panel">
+            <span class="panel-kicker">CURRENT BOUNDARY</span>
+            <h2>处理边界</h2>
+            <ul>
+              <li>本地文件只在当前浏览器内存中处理</li>
+              <li>合成基准集不包装为真实审计</li>
+              <li>AI 不生成或篡改任何金额结论</li>
+              <li>PDF 正文仅在用户点击后按需解析</li>
+            </ul>
+          </article>
+        </aside>
+      </div>
+    </section>
+
+    <section class="view" id="workspace" data-view-panel="workspace" hidden>
+      <header class="section-heading workspace-heading">
+        <div>
+          <span class="panel-kicker">LOCAL-FIRST WORKSPACE</span>
+          <h1>导入文件，找到异常。</h1>
+          <p>支持 ZIP、CSV、TSV、JSON、XLSX 与 PDF。结构化数据直接进入统一模型，PDF 先建立索引，只有点击证据时才读取正文。</p>
+        </div>
+        <div class="workspace-score">
+          <span>当前规则</span>
+          <strong id="workspace-rule-count">—</strong>
+          <small>金额由程序确定性计算</small>
+        </div>
+      </header>
+
+      <div class="privacy-callout">
+        <span class="privacy-icon">⌂</span>
+        <div><b>本地处理，不上传文件</b><p>解析、模拟和证据预览都在当前浏览器内存完成；刷新页面后数据即清除。</p></div>
+        <button type="button" id="reset-demo">恢复内置基准</button>
+      </div>
+
+      <div class="workspace-grid">
+        <article class="panel import-panel">
+          <header class="panel-header">
+            <div><span class="panel-kicker">RING 06 / IMPORT</span><h2>文件导入与字段识别</h2></div>
+            <span class="workspace-status" id="workspace-status" data-state="idle">当前使用内置合成基准</span>
+          </header>
+          <div class="drop-zone" id="drop-zone">
+            <input id="file-input" type="file" accept=".zip,.csv,.tsv,.json,.xlsx,.pdf" multiple hidden>
+            <div class="drop-mark">＋</div>
+            <h3>拖拽数据包或选择文件</h3>
+            <p>推荐直接选择原始 ZIP；也可同时选择月度成本、站点销售、广告、头程、采购台账与 PDF。</p>
+            <button class="primary-action" id="choose-files-button" type="button">选择本地文件 <span>↑</span></button>
+            <small>单文件不超过 30 MB · ZIP 最多 500 个受支持条目</small>
+          </div>
+          <div class="import-results" id="import-results" hidden>
+            <div class="result-heading"><b id="file-summary"></b><span>自动识别结果</span></div>
+            <div class="file-list" id="file-list"></div>
+            <ul class="import-warnings" id="import-warnings" hidden></ul>
+          </div>
+        </article>
+
+        <aside class="workspace-side">
+          <article class="panel simulation-panel">
+            <span class="panel-kicker">RING 09 / SAFE SIMULATION</span>
+            <h2>模拟异常实验室</h2>
+            <p>基于内存副本注入异常，绝不修改用户选择的原始文件。</p>
+            <label for="simulation-scenario">模拟场景</label>
+            <select id="simulation-scenario">
+              <option value="combined">组合异常：金额差额 + 重复月份 + 错期</option>
+              <option value="ads-gap">广告台账缺口 ¥120,000</option>
+              <option value="duplicate-month">重复导入一个经营月份</option>
+              <option value="period-shift">广告发票归属期错位</option>
+            </select>
+            <div class="simulation-actions">
+              <button type="button" id="run-simulation">运行模拟</button>
+              <button type="button" id="restore-baseline">还原基准</button>
+            </div>
+            <div class="simulation-banner" id="simulation-banner" hidden><b>SIMULATION</b><span>当前结果含明确标注的模拟异常</span></div>
+          </article>
+          <article class="panel rule-summary-panel">
+            <span class="panel-kicker">RULE COVERAGE</span>
+            <div class="rule-counts"><div><b id="rule-pass-count">—</b><span>通过</span></div><div><b id="rule-review-count">—</b><span>待复核</span></div><div><b id="rule-untested-count">—</b><span>未测试</span></div></div>
+          </article>
+        </aside>
+      </div>
+
+      <div class="analysis-results" id="analysis-results">
+        <article class="panel issue-panel">
+          <header class="panel-header">
+            <div><span class="panel-kicker">RING 07 + 10 / RULES & EXPLANATION</span><h2>异常与处理建议</h2></div>
+            <span class="safe-chip">点击任一规则查看计算口径与来源行</span>
+          </header>
+          <div class="issue-list" id="issue-list"></div>
+        </article>
+
+        <article class="panel evidence-library-panel">
+          <header class="panel-header">
+            <div><span class="panel-kicker">RING 08 / EVIDENCE DRILL-DOWN</span><h2>证据库</h2></div>
+            <span class="panel-total">PDF 正文按需读取</span>
+          </header>
+          <div class="evidence-library" id="evidence-library"></div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div><b>跨境账证侦探</b><span>本地优先版 · 技术环 0—11</span></div>
+    <p>内置基准仅含匿名聚合数据；用户文件不会上传服务器。</p>
+  </footer>
+
+  <dialog class="evidence-dialog" id="evidence-dialog" aria-labelledby="evidence-title">
+    <button class="dialog-close" type="button" id="dialog-close" aria-label="关闭">×</button>
+    <span class="panel-kicker">EVIDENCE INDEX</span>
+    <h2 id="evidence-title">证据索引</h2>
+    <p id="evidence-description"></p>
+    <div class="calculation-box" id="calculation-box"></div>
+    <div class="evidence-items" id="evidence-items"></div>
+    <p class="dialog-note">出于公开安全考虑，此版本只展示匿名证据类型、数量和覆盖范围，不包含原始票据与身份字段。</p>
+  </dialog>
+
+  <dialog class="source-dialog" id="source-dialog" aria-labelledby="source-dialog-title">
+    <button class="dialog-close" type="button" id="source-dialog-close" aria-label="关闭">×</button>
+    <span class="panel-kicker" id="source-dialog-kicker">SOURCE EVIDENCE</span>
+    <h2 id="source-dialog-title">证据详情</h2>
+    <div id="source-dialog-body"></div>
+  </dialog>
+
+  <script src="vendor/jszip.min.js"></script>
+  <script src="data/demo-public.js"></script>
+  <script src="core/normalize.js"></script>
+  <script src="core/calculate.js"></script>
+  <script src="core/reconcile.js"></script>
+  <script src="core/evidence.js"></script>
+  <script src="core/importer.js"></script>
+  <script src="core/anomalies.js"></script>
+  <script src="core/explain.js"></script>
+  <script src="app.js"></script>
+  <script src="workspace.js"></script>
+</body>
+</html>
