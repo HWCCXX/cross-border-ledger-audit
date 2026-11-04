@@ -22,7 +22,15 @@ const { chromium } = require(playwrightPath);
       video.addEventListener("error", reject, { once: true });
     });
     await video.play();
-    await new Promise(function (resolve) { setTimeout(resolve, 5300); });
+    await new Promise(function (resolve, reject) {
+      const deadline = performance.now() + 15000;
+      function checkPlayback() {
+        if (video.currentTime >= 4.8 || video.ended) return resolve();
+        if (performance.now() >= deadline) return reject(new Error("Video did not advance to 4.8 seconds within 15 seconds"));
+        setTimeout(checkPlayback, 250);
+      }
+      checkPlayback();
+    });
     return { duration: Number.isFinite(video.duration) ? video.duration : "stream", currentTime: video.currentTime, ended: video.ended, width: video.videoWidth, height: video.videoHeight, readyState: video.readyState };
   });
   console.log(JSON.stringify(metadata, null, 2));
